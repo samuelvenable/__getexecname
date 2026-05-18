@@ -342,7 +342,7 @@ const char *__getexecname(long long pid) {
   std::string buffer;
   kvm_t *kd = nullptr;
   kinfo_proc *process_info = nullptr;
-  bool error = false, retried = false;
+  bool error = false, retried = false, leading_dash_removed = false;
   kd = kvm_openfiles(nullptr, nullptr, nullptr, KVM_NO_FILES, nullptr);
   if (kd) {
     if ((process_info = kvm_getprocs(kd, KERN_PROC_PID, (processid == -1) ? getpid() : processid, sizeof(struct kinfo_proc), &cntp))) {
@@ -376,6 +376,11 @@ const char *__getexecname(long long pid) {
             path = verifyexeex(argv0, processid);
             if (!path.empty()) break;
           }
+        }
+        if (!leading_dash_removed && buffer[0] == '-' && buffer.length() > 1) {
+          buffer = buffer.substr(1);
+          leading_dash_removed = true;
+          goto retry;
         }
       }
       if (path.empty() && !retried) {

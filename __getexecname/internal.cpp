@@ -232,7 +232,7 @@ const char *__getexecname(void) {
     if (slash_pos == 0) {
       argv0 = buffer;
       path = verifyexe(argv0);
-    } else if (slash_pos == std::string::npos || slash_pos > colon_pos) { 
+    } else if (slash_pos == std::string::npos || slash_pos > colon_pos) {
       retry_without_leading_dash:
       std::string penv = cppgetenv("PATH");
       if (!penv.empty()) {

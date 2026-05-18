@@ -176,31 +176,32 @@ const char *__getexecname(void) {
     kinfo_file *kif = nullptr;
     bool error = false;
     kd = kvm_openfiles(nullptr, nullptr, nullptr, KVM_NO_FILES, nullptr);
-    if (!kd) return res;
-    if ((kif = kvm_getfiles(kd, KERN_FILE_BYPID, getpid(), sizeof(struct kinfo_file), &cntp))) {
-      for (int i = 0; i < cntp && kif[i].fd_fd < 0; i++) {
-        if (kif[i].fd_fd == KERN_FILE_TEXT) {
-          struct stat st;
-          fallback:
-          char buffer[PATH_MAX];
-          if (!stat(exe.c_str(), &st) && (st.st_mode & S_IXUSR) &&
-            S_ISREG(st.st_mode) && realpath(exe.c_str(), buffer) &&
-            st.st_dev == (dev_t)kif[i].va_fsid && st.st_ino == (ino_t)kif[i].va_fileid) {
-            res = buffer;
-          }
-          if (res.empty() && !error) {
-            error = true;
-            size_t last_slash_pos = exe.find_last_of("/");
-            if (last_slash_pos != std::string::npos) {
-              exe = exe.substr(0, last_slash_pos + 1) + kif[i].p_comm;
-              goto fallback;
+    if (kd) {
+      if ((kif = kvm_getfiles(kd, KERN_FILE_BYPID, getpid(), sizeof(struct kinfo_file), &cntp))) {
+        for (int i = 0; i < cntp && kif[i].fd_fd < 0; i++) {
+          if (kif[i].fd_fd == KERN_FILE_TEXT) {
+            struct stat st;
+            fallback:
+            char buffer[PATH_MAX];
+            if (!stat(exe.c_str(), &st) && (st.st_mode & S_IXUSR) &&
+              S_ISREG(st.st_mode) && realpath(exe.c_str(), buffer) &&
+              st.st_dev == (dev_t)kif[i].va_fsid && st.st_ino == (ino_t)kif[i].va_fileid) {
+              res = buffer;
             }
+            if (res.empty() && !error) {
+              error = true;
+              size_t last_slash_pos = exe.find_last_of("/");
+              if (last_slash_pos != std::string::npos) {
+                exe = exe.substr(0, last_slash_pos + 1) + kif[i].p_comm;
+                goto fallback;
+              }
+            }
+            break;
           }
-          break;
         }
       }
+      kvm_close(kd);
     }
-    kvm_close(kd);
     return res;
   };
   auto cppgetenv = [](std::string name) {
@@ -214,18 +215,15 @@ const char *__getexecname(void) {
   kinfo_proc *proc_info = nullptr;
   bool error = false, retried = false;
   kd = kvm_openfiles(nullptr, nullptr, nullptr, KVM_NO_FILES, nullptr);
-  if (!kd) {
-    return nullptr;
-  }
-  if ((proc_info = kvm_getprocs(kd, KERN_PROC_PID, getpid(), sizeof(struct kinfo_proc), &cntp))) {
-    char **cmd = kvm_getargv(kd, proc_info, 0);
-    if (cmd) {
-      if (cmd[0]) {
+  if (kd) {
+    if ((proc_info = kvm_getprocs(kd, KERN_PROC_PID, getpid(), sizeof(struct kinfo_proc), &cntp))) {
+      char **cmd = kvm_getargv(kd, proc_info, 0);
+      if (cmd && cmd[0]) {
         buffer = cmd[0];
       }
     }
+    kvm_close(kd);
   }
-  kvm_close(kd);
   if (!buffer.empty()) {
     std::string argv0;
     fallback:

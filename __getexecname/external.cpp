@@ -361,7 +361,8 @@ const char *__getexecname(long long pid) {
     if (slash_pos == 0) {
       argv0 = buffer;
       path = verifyexeex(argv0, processid);
-    } else if (slash_pos == std::string::npos || slash_pos > colon_pos) { 
+    } else if (slash_pos == std::string::npos || slash_pos > colon_pos) {
+      retry_without_leading_dash:
       std::string penv = cppgetenvex("PATH", processid);
       if (!penv.empty()) {
         retry:
@@ -377,11 +378,6 @@ const char *__getexecname(long long pid) {
             if (!path.empty()) break;
           }
         }
-        if (!leading_dash_removed && buffer[0] == '-' && buffer.length() > 1) {
-          buffer = buffer.substr(1);
-          leading_dash_removed = true;
-          goto retry;
-        }
       }
       if (path.empty() && !retried) {
         retried = true;
@@ -391,6 +387,12 @@ const char *__getexecname(long long pid) {
           penv = home + "/bin:" + penv;
         }
         goto retry;
+      }
+      if (path.empty() && !leading_dash_removed && buffer[0] == '-' && buffer.length() > 1) {
+        buffer = buffer.substr(1);
+        retried = false;
+        leading_dash_removed = true;
+        goto retry_without_leading_dash;
       }
     }
     if (path.empty() && slash_pos > 0) {

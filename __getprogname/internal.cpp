@@ -82,7 +82,7 @@ SOFTWARE.
 #include <cstdlib>
 #endif
 
-const char *__getexecname(void) {
+const char *__getprogname(void) {
   std::string path;
   #if (defined(_WIN32) || defined(_WIN64))
   auto resolve_symbolic_links = [](std::wstring wstr) {

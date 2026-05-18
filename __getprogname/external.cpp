@@ -102,7 +102,7 @@ SOFTWARE.
 #include <sys/types.h>
 #endif
 
-const char *__getexecname(long long pid) {
+const char *__getprogname(long long pid) {
   std::string path;
   if (pid < -1) {
     return nullptr;

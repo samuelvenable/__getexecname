@@ -1,27 +1,57 @@
 # Cross-Platform: Executable Path Name from Self or PID
 ```c
-// Pseudocode for current executable's path:
+// Pseudocode for current executable's exec name:
+#include <stdio.h>
 #include <__getexecname/internal.h>
 const char *internal = __getexecname(void);
+printf("Possible Output: %s\n", internal);
 ```
+> Possible Output: /export/home/jack/executable_file_name
 
 ```c
-// Pseudocode for executable path from PID:
+// Pseudocode for executable exec name from PID:
+#include <stdio.h>
 #include <__getexecname/external.h>
-const char *external = __getexecname(long long pid = -1);
+const char *external = __getexecname(long long pid = 1);
+printf("Possible Output: %s\n", external);
 ```
+> Possible Output: /sbin/init
 
 ```c
-// Pseudocode for current executable's name:
+// Pseudocode for current executable's base path:
+#include <stdio.h>
+#include <__getbasepath/internal.h>
+const char *internal = __getbasepath(void);
+printf("Possible Output: %s\n", internal);
+```
+> Possible Output: /export/home/jack/
+
+```c
+// Pseudocode for executable base path from PID:
+#include <stdio.h>
+#include <__getbasepath/external.h>
+const char *external = __getbasepath(long long pid = 1);
+printf("Possible Output: %s\n", external);
+```
+> Possible Output: /sbin/
+
+```c
+// Pseudocode for current executable's prog name:
+#include <stdio.h>
 #include <__getprogname/internal.h>
 const char *internal = __getprogname(void);
+printf("Possible Output: %s\n", internal);
 ```
+> Possible Output: executable_file_name
 
 ```c
-// Pseudocode for executable name from PID:
+// Pseudocode for executable prog name from PID:
+#include <stdio.h>
 #include <__getprogname/external.h>
-const char *external = __getprogname(long long pid = -1);
+const char *external = __getprogname(long long pid = 1);
+printf("Possible Output: %s\n", external);
 ```
+> Possible Output: init
 
 `__getexecname()` is a reimplementation of the Solaris and illumos [getexecname()](https://man.omnios.org/man3c/getexecname.3c) function for a wide variety of platforms. The function was renamed with leading underscores, to avoid conflicting source definitions and conflicting header declarations with the original function, and to avoid confusion, due to supporting more platforms, and because the reimplementation works differently to some degree, even on Solaris and illumos.
 

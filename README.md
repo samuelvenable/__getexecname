@@ -6,7 +6,7 @@
 const char *internal = __getexecname(void);
 printf("Possible Output: %s\n", internal);
 ```
-> Possible Output: /export/home/jack/executable_file_name
+> Possible Output: /export/home/jack/executable
 
 ```c
 // Pseudocode for executable exec name from PID:
@@ -42,7 +42,7 @@ printf("Possible Output: %s\n", external);
 const char *internal = __getprogname(void);
 printf("Possible Output: %s\n", internal);
 ```
-> Possible Output: executable_file_name
+> Possible Output: executable
 
 ```c
 // Pseudocode for executable prog name from PID:

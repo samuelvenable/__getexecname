@@ -48,5 +48,8 @@ int main(int argc, char **argv) {
   } else {
     printf("const char *__getprogname(void) = %s\n", internal_progname);
   }
+  if (!internal_execname || !internal_basepath || !internal_progname) {
+    return 1;
+  }
   return 0;
 }

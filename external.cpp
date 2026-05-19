@@ -53,5 +53,8 @@ int main(int argc, char **argv) {
   } else {
     printf("const char *__getprogname(long long pid = %lld) = %s\n", pid, external_progname);
   }
+  if (!external_execname || !external_basepath || !external_progname) {
+    return 1;
+  }
   return 0;
 }

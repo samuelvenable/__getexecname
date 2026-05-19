@@ -26,8 +26,8 @@ int main() {
 #endif
 int main() {
   // May require running as admin/root.
-  // Win32 init system process id is 4.
-  // Other init system process id is 1.
+  // Win32 init system process ID is 4.
+  // Other init system process ID is 1.
   const char *external = __getexecname(OS_WINDOWS ? 4 : 1);
   printf("Possible Output: %s\n", external);
   // error when __getexecname() failed.
@@ -63,8 +63,8 @@ int main() {
 #endif
 int main() {
   // May require running as admin/root.
-  // Win32 init system process id is 4.
-  // Other init system process id is 1.
+  // Win32 init system process ID is 4.
+  // Other init system process ID is 1.
   const char *external = __getbasepath(OS_WINDOWS ? 4 : 1);
   printf("Possible Output: %s\n", external);
   // error when __getbasepath() failed.
@@ -100,8 +100,8 @@ int main() {
 #endif
 int main() {
   // May require running as admin/root.
-  // Win32 init system process id is 4.
-  // Other init system process id is 1.
+  // Win32 init system process ID is 4.
+  // Other init system process ID is 1.
   const char *external = __getprogname(OS_WINDOWS ? 4 : 1);
   printf("Possible Output: %s\n", external);
   // error when __getprogname() failed.

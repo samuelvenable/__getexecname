@@ -24,17 +24,24 @@
  
 */
 
-#include "__getprogname/internal.h"
 #include "__getexecname/internal.h"
+#include "__getbasepath/internal.h"
+#include "__getprogname/internal.h"
 #include <cstdio>
 
 int main(int argc, char **argv) {
   const char *internal_execname = __getexecname();
+  const char *internal_basepath = __getbasepath();
   const char *internal_progname = __getprogname();
   if (internal_execname) {
     printf("const char *__getexecname(void) = \"%s\"\n", internal_execname);
   } else {
     printf("const char *__getexecname(void) = %s\n", internal_execname);
+  }
+  if (internal_basepath) {
+    printf("const char *__getbasepath(void) = \"%s\"\n", internal_basepath);
+  } else {
+    printf("const char *__getbasepath(void) = %s\n", internal_basepath);
   }
   if (internal_progname) {
     printf("const char *__getprogname(void) = \"%s\"\n", internal_progname);

@@ -24,8 +24,9 @@
  
 */
 
-#include "__getprogname/external.h"
 #include "__getexecname/external.h"
+#include "__getbasepath/external.h"
+#include "__getprogname/external.h"
 #include <cstdlib>
 #include <cstdio>
 
@@ -35,11 +36,17 @@ int main(int argc, char **argv) {
     pid = strtoll(argv[1], nullptr, 10);
   }
   const char *external_execname = __getexecname(pid);
+  const char *external_basepath = __getbasepath(pid);
   const char *external_progname = __getprogname(pid);
   if (external_execname) {
     printf("const char *__getexecname(long long pid = %lld) = \"%s\"\n", pid, external_execname);
   } else {
     printf("const char *__getexecname(long long pid = %lld) = %s\n", pid, external_execname);
+  }
+  if (external_basepath) {
+    printf("const char *__getbasepath(long long pid = %lld) = \"%s\"\n", pid, external_basepath);
+  } else {
+    printf("const char *__getbasepath(long long pid = %lld) = %s\n", pid, external_basepath);
   }
   if (external_progname) {
     printf("const char *__getprogname(long long pid = %lld) = \"%s\"\n", pid, external_progname);

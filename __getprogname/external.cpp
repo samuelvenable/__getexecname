@@ -100,6 +100,7 @@ SOFTWARE.
 #include <cstdlib>
 #include <unistd.h>
 #include <sys/types.h>
+#include <process.h>
 #endif
 
 const char *__getprogname(long long pid) {

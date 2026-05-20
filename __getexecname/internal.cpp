@@ -80,6 +80,7 @@ SOFTWARE.
 #include <cstdio>
 #include <climits>
 #include <cstdlib>
+#include <process.h>
 #endif
 
 const char *__getexecname(void) {

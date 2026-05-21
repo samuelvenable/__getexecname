@@ -24,7 +24,7 @@ elif [ $(uname) = "Haiku" ]; then
 elif [ $(uname) = "QNX" ]; then
   q++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static; ./internal;
 else
-  g++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal.exe -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static -Wl,--subsystem,console; ./internal.exe -1;
+  g++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal.exe -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static -Wl,--subsystem,console; ./internal.exe;
 fi
 # build external example
 if [ $(uname) = "Darwin" ]; then

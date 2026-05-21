@@ -23,5 +23,5 @@ elif [ $(uname) = "Haiku" ]; then
 elif [ $(uname) = "QNX" ]; then
   q++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o a.out -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static; ./a.out -1;
 else
-  g++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o a.out.exe -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static -Wl,--subsystem,console; ./a.out -1.exe;
+  g++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o a.out.exe -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static -Wl,--subsystem,console; ./a.out.exe -1;
 fi

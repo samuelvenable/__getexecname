@@ -32,7 +32,6 @@ SOFTWARE.
 #include <cstddef>
 #include <cstdlib>
 #include <windef.h>
-#include <windows.h>
 #include <fileapi.h>
 #include <stringapiset.h>
 #include <processthreadsapi.h>

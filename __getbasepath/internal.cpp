@@ -32,11 +32,11 @@ SOFTWARE.
 #include <cstddef>
 #include <cstdlib>
 #include <windef.h>
-#include <windows.h>
 #include <fileapi.h>
 #include <stringapiset.h>
 #include <libloaderapi.h>
 #include <handleapi.h>
+#include <winbase.h>
 #elif (defined(__APPLE__) && defined(__MACH__))
 #include <cstdint>
 #include <climits>

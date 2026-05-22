@@ -513,8 +513,8 @@ const char *__getbasepath(long long pid) {
       char exe[PATH_MAX];
       if (realpath(info.name, exe)) {
         path = exe;
-        break;
       }
+      break;
     }
   }
   #elif (defined(__QNX__) || defined(__QNXNTO__))

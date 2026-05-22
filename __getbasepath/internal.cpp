@@ -96,7 +96,7 @@ const char *__getbasepath(void) {
       if (len) {
         result = path;
         if (!result.substr(0, 8).compare(L"\\\\?\\UNC\\")) {
-          result = "\\" + result.substr(7);
+          result = L"\\" + result.substr(7);
         } else if (!result.substr(0, 4).compare(L"\\\\?\\")) {
           result = result.substr(4);
         }

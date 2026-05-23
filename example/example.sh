@@ -13,7 +13,7 @@ elif [ $(uname) = "Linux" ]; then
   fi
 elif [ $(uname -o) = "GNU/Hurd" ]; then
   g++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static; ./internal;
-elif [ $(uname) = "Cygwin" ]; then
+elif [ $(uname -o) = "Cygwin" ]; then
   g++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal.exe -I. -std=gnu++17 -Wall -static-libgcc -static-libstdc++ -static -Wl,--subsystem,console; ./internal.exe;
 elif [ $(uname) = "FreeBSD" ]; then
   clang++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall -static; ./internal;

@@ -9,6 +9,8 @@ elif [ $(uname) = "Linux" ]; then
   else
     clang++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall; ./internal;
   fi
+elif [ $(uname) = "GNU" ]; then
+  g++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static; ./internal;
 elif [ $(uname) = "FreeBSD" ]; then
   clang++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall -static; ./internal;
 elif [ $(uname) = "DragonFly" ]; then
@@ -35,6 +37,8 @@ elif [ $(uname) = "Linux" ]; then
   else
     clang++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o external -I. -std=c++17 -D__external__ -Wall; ./external -1;
   fi
+elif [ $(uname) = "GNU" ]; then
+  g++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o external -I. -std=c++17 -D__external__ -Wall -static-libgcc -static-libstdc++ -static; ./external -1;
 elif [ $(uname) = "FreeBSD" ]; then
   clang++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o external -I. -std=c++17 -D__external__ -Wall -static; ./external -1;
 elif [ $(uname) = "DragonFly" ]; then

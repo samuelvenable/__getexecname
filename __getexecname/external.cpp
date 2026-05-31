@@ -105,7 +105,7 @@ SOFTWARE.
 #include <OS.h>
 #endif
 
-const char *__getbasepath(long long pid) {
+const char *__getexecname(long long pid) {
   std::string path;
   if (pid < -1) {
     return nullptr;

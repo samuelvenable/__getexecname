@@ -112,7 +112,7 @@ const char *__getbasepath(long long pid) {
   }
   #if (defined(_WIN32) || defined(_WIN64))
   DWORD processid = (DWORD)pid;
-  wchar_t *_wrealpath(const wchar_t *path, wchar_t *resolved_path) {
+  auto _wrealpath = [](const wchar_t *path, wchar_t *resolved_path) {
     std::wstring result;
     wchar_t buf[MAX_PATH];
     wchar_t *ptr = (((wchar_t *)resolved_path) ? ((wchar_t *)resolved_path) : ((wchar_t *)buf));

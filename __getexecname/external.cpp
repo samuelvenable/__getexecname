@@ -95,6 +95,7 @@ SOFTWARE.
 #include <climits>
 #include <cstdlib>
 #include <unistd.h>
+#include <confname.h>
 #include <sys/types.h>
 #include <process.h>
 #elif defined(__HAIKU__)

@@ -78,8 +78,8 @@ SOFTWARE.
 #include <climits>
 #include <cstdlib>
 #include <unistd.h>
-#include <process.h>
 #include <confname.h>
+#include <process.h>
 #elif defined(__HAIKU__)
 #include <cstdint>
 #include <climits>

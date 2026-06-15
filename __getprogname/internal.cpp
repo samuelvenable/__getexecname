@@ -353,7 +353,7 @@ const char *__getprogname(void) {
   #endif
   char *buffer = (char *)malloc(maximum_path);
   if (buffer) {
-    if(_cmdname(buffer)) {
+    if (_cmdname(buffer)) {
       char exe[PATH_MAX];
       if (realpath(buffer, exe)) {
         path = exe;

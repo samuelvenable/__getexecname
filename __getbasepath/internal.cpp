@@ -346,7 +346,7 @@ const char *__getbasepath(void) {
   }
   #elif (defined(__QNX__) || defined(__QNXNTO__))
   char buffer[PATH_MAX];
-  if(_cmdname(buffer)) {
+  if (_cmdname(buffer)) {
     char exe[PATH_MAX];
     if (realpath(buffer, exe)) {
       path = exe;

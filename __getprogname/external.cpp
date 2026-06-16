@@ -524,7 +524,7 @@ const char *__getprogname(long long pid) {
   pid_t processid = (pid_t)pid;
   if (processid == -1 || processid == getpid()) {
     char buffer[PATH_MAX];
-    if(_cmdname(buffer)) {
+    if (_cmdname(buffer)) {
       char exe[PATH_MAX];
       if (realpath(buffer, exe)) {
         path = exe;

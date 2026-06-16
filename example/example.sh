@@ -13,7 +13,7 @@ elif [ `uname -o` = "GNU/Linux" ]; then
   else
     clang++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall; ./internal;
     clang++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o external -I. -std=c++17 -D__external__ -Wall; ./external -1;
-  fi
+  fi;
 elif [ `uname -o` = "GNU/Hurd" ]; then
   g++ __getexecname/internal.cpp __getbasepath/internal.cpp __getprogname/internal.cpp example/example.cpp -o internal -I. -std=c++17 -Wall -static-libgcc -static-libstdc++ -static; ./internal;
   g++ __getexecname/external.cpp __getbasepath/external.cpp __getprogname/external.cpp example/example.cpp -o external -I. -std=c++17 -D__external__ -Wall -static-libgcc -static-libstdc++ -static; ./external -1;
